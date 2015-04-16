@@ -48,6 +48,10 @@ public interface Answer {
 	 * returns the unique identifier of this choice
 	 * 
 	 * @return the Identifier of this choice
+	
+
+Test Georg Galler
+Elvis Dzafic
  */
 	public int getId();
 }
