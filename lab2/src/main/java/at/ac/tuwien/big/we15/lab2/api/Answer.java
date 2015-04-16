@@ -51,6 +51,7 @@ public interface Answer {
 	
 
 Test Georg Galler
+Elvis Dzafic
  */
 	public int getId();
 }
