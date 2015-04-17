@@ -25,7 +25,7 @@
         <div role="main">
             <section id="login" aria-labelledby="loginheading">
                <h2 id="loginheading" class="accessibility">Login</h2>
-                <form action="jeopardy.xhtml" method="post">
+                <form action="jeopardy.jsp" method="post">
                     <fieldset>
                         <legend id="logindata">Login</legend>
                         <label for="username">Benutzername:</label>
@@ -40,11 +40,11 @@
             <section id="registerforward" aria-labelledby="registerheading">
                 <h2 id="registerheading" class="accessibility">Registrierung</h2>
                 <p id="registerhint">Nicht registriert?</p>
-                <a class="contentlink orangelink" title="Klicke hier um dich zu registrieren" href="register.xhtml" accesskey="r">Zur Registrierung</a>
+                <a class="contentlink orangelink" title="Klicke hier um dich zu registrieren" href="register.jsp" accesskey="r">Zur Registrierung</a>
             </section>
         </div>
 
         <!-- footer -->
-        <footer role="contentinfo">© 2015 BIG Jeopardy</footer>
+        <footer role="contentinfo">&copy; 2015 BIG Jeopardy</footer>
     </body>
 </html>
