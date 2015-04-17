@@ -17,12 +17,16 @@ import javax.servlet.http.HttpSession;
 public class jeopardyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private String username;
+	private String password;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public jeopardyServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        username = "";
+        password = "";
     }
 
 	/**
@@ -40,9 +44,20 @@ public class jeopardyServlet extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		String pageName = request.getParameter("pageName");
 		
-		if (true) {
+		if (pageName.equals("login")) {
 
 			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+			//funktioniert noch nicht...
+			if(this.username.length() == 0) {
+					
+					this.username = request.getParameter("username");
+					this.password = request.getParameter("password");
+					response.encodeRedirectURL("jeopardy.jsp");
+					response.encodeURL("jeopardy.jsp");
+					System.out.println("Test");
+			} else {
+				//stay without anything
+			}
 
 		}
 	}
