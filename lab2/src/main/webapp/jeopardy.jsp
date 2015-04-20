@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+ 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
+<%@page import="java.util.List" %>
+<%@page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
+<%@page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
+<%@page import="at.ac.tuwien.big.we15.lab2.servlet.jeopardyServlet" %>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>

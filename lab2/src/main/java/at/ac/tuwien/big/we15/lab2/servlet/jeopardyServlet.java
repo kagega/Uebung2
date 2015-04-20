@@ -1,6 +1,9 @@
 package at.ac.tuwien.big.we15.lab2.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
+import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.ServletConfig;
+import javax.servlet.*;
+
+import at.ac.tuwien.big.we15.lab2.api.Category;
+import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
+import at.ac.tuwien.big.we15.lab2.api.impl.JSONQuestionDataProvider;
+import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
+import at.ac.tuwien.big.we15.lab2.api.impl.SimpleJeopardyFactory;
+
+import com.google.common.reflect.Parameter;
 
 /**
  * Servlet implementation class jeopardyServlet
@@ -16,50 +29,75 @@ import javax.servlet.http.HttpSession;
 @WebServlet(description = "the servlet is the controller", urlPatterns = { "/jeopardyServlet" })
 public class jeopardyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	private String username;
-	private String password;
+    
+	private List<Category> information = new ArrayList<Category>();
 	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public jeopardyServlet() {
-        super();
-        username = "";
-        password = "";
-    }
-
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		ServletContext servletContext = config.getServletContext();
+		ServletJeopardyFactory factory = new ServletJeopardyFactory(servletContext);
+		QuestionDataProvider provider = factory.createQuestionDataProvider();
+		information.addAll(provider.getCategoryData());
+	}
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+
+			if(request.getParameter("action") == null)
+				return;
+			if(request.getParameter("action").compareTo("registerButtonClicked") == 0) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+				dispatcher.forward(request, response);
+			}
+			if(request.getParameter("action").compareTo("logoutlinkButtonClicked") == 0) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			if(request.getParameter("action").compareTo("loginButtonClicked") == 0) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			if(request.getParameter("action").compareTo("restartButtonClicked") == 0) {
+				request.setAttribute("information", information);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-		RequestDispatcher dispatcher = null;
-		String pageName = request.getParameter("pageName");
 		
-		if (pageName.equals("login")) {
-
-			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-			//funktioniert noch nicht...
-			if(this.username.length() == 0) {
-					
-					this.username = request.getParameter("username");
-					this.password = request.getParameter("password");
-					response.encodeRedirectURL("jeopardy.jsp");
-					response.encodeURL("jeopardy.jsp");
-					System.out.println("Test");
-			} else {
-				//stay without anything
-			}
-
+		if(request.getParameter("action") == null)
+			return;
+		if(request.getParameter("action").compareTo("signInButtonClicked") == 0) {
+			HttpSession session = request.getSession();
 		}
+		if(request.getParameter("action").compareTo("questionSubmitButtonClicked") == 0) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		if(request.getParameter("action").compareTo("registerButtonClicked") == 0) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jeopardy.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		if(request.getParameter("action").compareTo("submitButtonClicked") == 0) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/winner.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+
+
 	}
 
 }

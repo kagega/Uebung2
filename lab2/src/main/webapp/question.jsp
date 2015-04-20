@@ -3,6 +3,11 @@
     pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
+<%@page import="at.ac.tuwien.big.we15.lab2.servlet.jeopardyServlet"%>
+<%@ page import="java.util.List"%>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Answer" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -66,7 +71,10 @@
             <p id="round">Frage: 3 / 10</p>
          </section>
             
-      <!-- Question -->
+      <!-- Question-->
+      
+      
+      
       <section id="question" aria-labelledby="questionheading">
             <form id="questionform" action="jeopardy.jsp" method="get">
                <h2 id="questionheading" class="accessibility">Frage</h2>
